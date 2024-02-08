@@ -8,7 +8,7 @@ from target_qlsv2.client import QlsV2Sink
 class BuyOrdersV2Sink(QlsV2Sink):
     """QlsV2 target sink class."""
 
-    name = "BuyOrdersV2"
+    name = "BuyOrders"
     endpoint = "purchase-orders"
 
     def preprocess_record(self, record: dict, context: dict) -> dict:
