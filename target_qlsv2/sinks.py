@@ -1,6 +1,7 @@
 """QlsV2 target sink class, which handles writing streams."""
 
 import ast
+from datetime import datetime
 
 from target_qlsv2.client import QlsV2Sink
 
