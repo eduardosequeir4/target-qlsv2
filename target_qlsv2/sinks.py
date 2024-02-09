@@ -12,6 +12,7 @@ class BuyOrdersV2Sink(QlsV2Sink):
     endpoint = "purchase-orders"
 
     def preprocess_record(self, record: dict, context: dict) -> dict:
+        deliveries= [{"estimated_arrival":record["created_at"]}]
         if "line_items" in record:
             record["line_items"] = ast.literal_eval(record["line_items"])
             purchase_order_products = list(
@@ -27,7 +28,7 @@ class BuyOrdersV2Sink(QlsV2Sink):
                 )
             )
 
-            payload = {"suppliers": [record["supplier_remoteId"]], "customer_title": record["id"],"pre_order": 0,"purchase_order_products": purchase_order_products}
+            payload = {"suppliers": [record["supplier_remoteId"]], "customer_title": record["id"],"pre_order": 0,"purchase_order_products": purchase_order_products, "deliveries": deliveries}
 
             processed_record = {
                 "buy_order_remoteId": record["remoteId"],
