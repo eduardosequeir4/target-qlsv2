@@ -12,7 +12,9 @@ class BuyOrdersV2Sink(QlsV2Sink):
     endpoint = "purchase-orders"
 
     def preprocess_record(self, record: dict, context: dict) -> dict:
-        deliveries= [{"estimated_arrival":record["created_at"]}]
+        dateoriginal = datetime.strptime(record["created_at"], "%Y-%m-%dT%H:%M:%S.%fZ")
+        dateoriginal = dateoriginal.strftime("%Y-%m-%d")
+        deliveries= [{"estimated_arrival":dateoriginal}]
         if "line_items" in record:
             record["line_items"] = ast.literal_eval(record["line_items"])
             purchase_order_products = list(
