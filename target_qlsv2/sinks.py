@@ -27,7 +27,7 @@ class BuyOrdersV2Sink(QlsV2Sink):
                 )
             )
 
-            payload = {"suppliers": [record["supplier_remoteId"]], "customer_title": record["id"],"purchase_order_products": purchase_order_products}
+            payload = {"suppliers": [record["supplier_remoteId"]], "customer_title": record["id"],"pre_order": 0,"purchase_order_products": purchase_order_products}
 
             processed_record = {
                 "buy_order_remoteId": record["remoteId"],
