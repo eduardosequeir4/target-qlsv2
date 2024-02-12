@@ -31,6 +31,7 @@ class BuyOrdersV2Sink(QlsV2Sink):
                 )
             )
 
+            record["id"] = str(record["id"])
             payload = {"suppliers": [record["supplier_remoteId"]], "customer_title": record["id"],"pre_order": 0,"purchase_order_products": purchase_order_products, "deliveries": deliveries}
 
             processed_record = {
