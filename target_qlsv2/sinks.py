@@ -14,13 +14,6 @@ class BuyOrdersV2Sink(QlsV2Sink):
 
     def preprocess_record(self, record: dict, context: dict) -> dict:
         dateoriginal = record["created_at"]
-        dateoriginal = datetime.fromisoformat(dateoriginal[:-1]).replace(tzinfo=timezone.utc)
-        datecompare = datetime.now(timezone.utc) + timedelta(days=1)
-        # Check if dateoriginal is less than current datetime plus 1 day
-        if dateoriginal < datecompare:
-            # Add 2 days
-            dateoriginal += timedelta(days=2)
-
         # Adjusting for Saturday and Sunday
         if dateoriginal.weekday() == 5:  # Saturday
             dateoriginal += timedelta(days=2)
